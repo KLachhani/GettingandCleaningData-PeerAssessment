@@ -28,10 +28,9 @@ run_analysis <- function() {
         colnames(finalx)<-c("Subject","Activity",features[,2])
         
         ##identify mean and std columns
-        meancol<-grepl(pattern="mean()",x=colname,fixed=TRUE)
-        stdcol<-grepl(pattern="std()",x=colname,fixed=TRUE)
-               
-        
+        meancol<-grepl(pattern="mean()",x=features[,2],fixed=TRUE)
+        stdcol<-grepl(pattern="std()",x=features[,2],fixed=TRUE)
+              
         ##new data rame with only mean and std columns
         finalx<-finalx[,as.logical(c(1,1,meancol+stdcol))]
                 
@@ -41,5 +40,6 @@ run_analysis <- function() {
         tidy<-aggregate(x=finalx,by=list(Subject=finalx$Subject,Activity=finalx$Activity),FUN=mean)[,-c(3,4)]
         tidy<-tidy[order(tidy[,1],tidy[,2]),]
         
+        return(tidy)
         write.table(x=tidy,file="tidy.txt",sep=" ")       
 }
