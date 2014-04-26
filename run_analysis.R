@@ -41,6 +41,5 @@ run_analysis <- function() {
         tidy<-aggregate(x=finalx,by=list(Subject=finalx$Subject,Activity=finalx$Activity),FUN=mean)[,-c(3,4)]
         tidy<-tidy[order(tidy[,1],tidy[,2]),]
         
-        return(tidy)
-        
+        write.table(x=tidy,file="tidy.txt",sep=" ")       
 }
