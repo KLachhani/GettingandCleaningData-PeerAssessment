@@ -38,14 +38,9 @@ run_analysis <- function() {
         finalx[,1]<-as.numeric(finalx[,1])
         finalx<-finalx[order(finalx[,1],finalx[,2]),]
         
-        print(dim(finalx))
-        
-        tidy<-aggregate(x=finalx,by=list(Subject=finalx$Subject,Activity=finalx$Activity),FUN=mean)[,c(1,2,5:dim(finalx)[2])]
+        tidy<-aggregate(x=finalx,by=list(Subject=finalx$Subject,Activity=finalx$Activity),FUN=mean)[,-c(3,4)]
         tidy<-tidy[order(tidy[,1],tidy[,2]),]
         
-        print(dim(tidy))
         return(tidy)
-        
-        
         
 }
